@@ -2,16 +2,19 @@ const {JsmsService} = require("jsms");
 
 const messageService = new JsmsService();
 
+messageService.send("/some/queue", {abc: "xyz"})
+    .then(response => {
+        console.log(response.body); // expected output: {xyz: "abc"}
+    });
+
 messageService.receive("/some/queue")
-    .then((message) => {
-        console.log(message.body);
-        // expected output: {request: "foo"}
-        return {response: "ACK"};
+    .then(message => {
+        console.log(message.body); // expected output: {abc: "xyz"}
+        return {xyz: "abc"};
     });
 
-messageService.send("/some/queue", {request: "foo"})
-    .then((response) => {
-        console.log(response.body);
-        // expected output: {response: "ACK"}
-    });
+messageService.subscribe("/some/topic", message => {
+    console.log(message.body); // expected output: {zyx: "cab"}
+});
 
+messageService.publish("/some/topic", {zyx: "cab"});

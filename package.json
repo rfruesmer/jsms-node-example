@@ -10,6 +10,6 @@
   "author": "Reinhold Früsmer",
   "license": "MIT",
   "dependencies": {
-    "jsms": "^1.0.0-alpha.14"
+    "jsms": "^1.0.0-alpha.32"
   }
 }
